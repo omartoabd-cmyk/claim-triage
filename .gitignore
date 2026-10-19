@@ -1,0 +1,24 @@
+HELP.md
+target/
+data/
+.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### Secrets ###
+.env
+*.local.properties
+application-local.properties
+application-secret.properties
+
+### IDE ###
+.idea/
+*.iml
+.vscode/
+.classpath
+.project
+.settings/
+
+### Frontend ###
+node_modules/
+dist/
