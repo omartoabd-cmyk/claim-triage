@@ -4,6 +4,27 @@ Spring Boot 4 (Java 17) API + React/Vite UI. Users submit insurance claims; an
 OpenAI model produces an advisory triage (summary, category, missing info,
 risk, next steps) that is saved with the claim.
 
+## System Design
+
+```mermaid
+flowchart LR
+    Reviewer["Claims reviewer"] --> UI["React dashboard"]
+    UI -->|"Submit, list, update status, or analyze"| API["Spring Boot REST API<br/>ClaimController"]
+    API --> Service["ClaimService<br/>Claim workflow and saved analysis"]
+    Service --> Repo["ClaimRepository<br/>Spring Data JPA"]
+    Repo --> DB[("Local H2 database<br/>Claims and analyses")]
+    Service -->|"New analysis or requested refresh"| AI["AIService"]
+    AI -->|"Claim details"| OpenAI["OpenAI API"]
+    OpenAI -->|"Structured assessment"| AI
+```
+
+The dashboard sends claim submissions and status updates to the Spring Boot API,
+which stores them in H2. When a reviewer requests analysis, the API returns the
+saved assessment if available. For a first analysis or an explicit refresh, the
+backend calls OpenAI and saves the resulting summary, category, missing
+information, risk level, and suggested next steps. The reviewer decides whether
+to approve or deny the claim and updates its status in the dashboard.
+
 ## Run
 
 ```bash
