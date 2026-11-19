@@ -4,6 +4,10 @@ Spring Boot 4 (Java 17) API + React/Vite UI. Users submit insurance claims; an
 OpenAI model produces an advisory triage (summary, category, missing info,
 risk, next steps) that is saved with the claim.
 
+![Claim Triage Center showing the intake form, a home insurance claim in review, and its assessment](docs/claim-triage-dashboard.png)
+
+*Dashboard shown with a fictional claim and an illustrative assessment.*
+
 ## System Design
 
 ```mermaid
